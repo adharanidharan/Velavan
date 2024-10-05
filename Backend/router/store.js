@@ -9,3 +9,16 @@ app.post("/add", store.addStore);
 app.get("/get/:userID", store.getAllStores)
 
 module.exports = app;
+
+
+// const express = require("express");
+// const router = express.Router();
+// const storeController = require("../controller/store");
+
+// // Add Store
+// router.post("/add", storeController.addStore);
+
+// // Get All Stores
+// router.get("/get/:userID", storeController.getAllStores);
+
+// module.exports = router;

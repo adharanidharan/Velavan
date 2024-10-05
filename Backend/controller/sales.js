@@ -1,3 +1,76 @@
+// const Sales = require("../models/sales");
+// const soldStock = require("../controller/soldStock");
+
+// // Add Sales
+// const addSales = (req, res) => {
+//   const addSale = new Sales({
+//     userID: req.body.userID,
+//     ProductID: req.body.productID,
+//     StoreID: req.body.storeID,
+//     StockSold: req.body.stockSold,
+//     SaleDate: req.body.saleDate,
+//     TotalSaleAmount: req.body.totalSaleAmount,
+//   });
+
+//   addSale
+//     .save()
+//     .then((result) => {
+//       soldStock(req.body.productID, req.body.stockSold);
+//       res.status(200).send(result);
+//     })
+//     .catch((err) => {
+//       res.status(402).send(err);
+//     });
+// };
+
+// // Get All Sales Data
+// const getSalesData = async (req, res) => {
+//   const findAllSalesData = await Sales.find({"userID": req.params.userID})
+//     .sort({ _id: -1 })
+//     .populate("ProductID")
+//     .populate("StoreID"); // -1 for descending order
+//   res.json(findAllSalesData);
+// };
+
+// // Get total sales amount
+// const getTotalSalesAmount = async(req,res) => {
+//   let totalSaleAmount = 0;
+//   const salesData = await Sales.find({"userID": req.params.userID});
+//   salesData.forEach((sale)=>{
+//     totalSaleAmount += sale.TotalSaleAmount;
+//   })
+//   res.json({totalSaleAmount});
+
+// }
+
+// const getMonthlySales = async (req, res) => {
+//   try {
+//     const sales = await Sales.find();
+
+//     // Initialize array with 12 zeros
+//     const salesAmount = [];
+//     salesAmount.length = 12;
+//     salesAmount.fill(0)
+
+//     sales.forEach((sale) => {
+//       const monthIndex = parseInt(sale.SaleDate.split("-")[1]) - 1;
+
+//       salesAmount[monthIndex] += sale.TotalSaleAmount;
+//     });
+
+//     res.status(200).json({ salesAmount });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ error: "Server error" });
+//   }
+// };
+
+
+
+// module.exports = { addSales, getMonthlySales, getSalesData,  getTotalSalesAmount};
+
+
+
 const Sales = require("../models/sales");
 const soldStock = require("../controller/soldStock");
 
@@ -10,6 +83,7 @@ const addSales = (req, res) => {
     StockSold: req.body.stockSold,
     SaleDate: req.body.saleDate,
     TotalSaleAmount: req.body.totalSaleAmount,
+    SinglePiecePrice: req.body.singlePiecePrice, // Save single piece price
   });
 
   addSale
@@ -25,24 +99,24 @@ const addSales = (req, res) => {
 
 // Get All Sales Data
 const getSalesData = async (req, res) => {
-  const findAllSalesData = await Sales.find({"userID": req.params.userID})
+  const findAllSalesData = await Sales.find({ userID: req.params.userID })
     .sort({ _id: -1 })
     .populate("ProductID")
-    .populate("StoreID"); // -1 for descending order
+    .populate("StoreID");
   res.json(findAllSalesData);
 };
 
 // Get total sales amount
-const getTotalSalesAmount = async(req,res) => {
+const getTotalSalesAmount = async (req, res) => {
   let totalSaleAmount = 0;
-  const salesData = await Sales.find({"userID": req.params.userID});
-  salesData.forEach((sale)=>{
+  const salesData = await Sales.find({ userID: req.params.userID });
+  salesData.forEach((sale) => {
     totalSaleAmount += sale.TotalSaleAmount;
-  })
-  res.json({totalSaleAmount});
+  });
+  res.json({ totalSaleAmount });
+};
 
-}
-
+// Get monthly sales
 const getMonthlySales = async (req, res) => {
   try {
     const sales = await Sales.find();
@@ -50,11 +124,10 @@ const getMonthlySales = async (req, res) => {
     // Initialize array with 12 zeros
     const salesAmount = [];
     salesAmount.length = 12;
-    salesAmount.fill(0)
+    salesAmount.fill(0);
 
     sales.forEach((sale) => {
       const monthIndex = parseInt(sale.SaleDate.split("-")[1]) - 1;
-
       salesAmount[monthIndex] += sale.TotalSaleAmount;
     });
 
@@ -65,6 +138,4 @@ const getMonthlySales = async (req, res) => {
   }
 };
 
-
-
-module.exports = { addSales, getMonthlySales, getSalesData,  getTotalSalesAmount};
+module.exports = { addSales, getMonthlySales, getSalesData, getTotalSalesAmount };

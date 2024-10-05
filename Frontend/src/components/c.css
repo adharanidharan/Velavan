@@ -1,0 +1,9 @@
+.logtxt{
+ max-width: 50px;
+ font-weight: bold;
+ text-align: center;
+}
+
+    .logtxt h1 {
+        white-space: nowrap;
+      }

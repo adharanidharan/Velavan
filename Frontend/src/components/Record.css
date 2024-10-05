@@ -1,0 +1,45 @@
+.record-container {
+    padding: 5px;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .record-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-label {
+    margin-bottom: 10px;
+  }
+  
+  .form-input, .form-select {
+    margin-top: 5px;
+    padding: 8px;
+    width: 100%;
+    background-color: rgb(58, 56, 56);
+    color: #fff;
+    border-radius: 5px;
+  }
+  
+  .submit-button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: rgb(244, 15, 15);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #45a049;
+  }
+  
+  .error {
+    color: red;
+  }
+  

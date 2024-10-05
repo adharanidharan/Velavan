@@ -1,86 +1,187 @@
+// import React from "react";
+// import { Link } from "react-router-dom";
+
+// function SideMenu() {
+//   const localStorageData = JSON.parse(localStorage.getItem("user"));
+
+//   // Check the email domain
+//   const isAdmin = localStorageData.email.endsWith('@velavan.com');
+
+//   return (
+//     <div className="h-full flex-col justify-between bg-white hidden lg:flex">
+//       <div className="px-4 py-6">
+//         <nav aria-label="Main Nav" className="mt-6 flex flex-col space-y-1">
+//           <Link to="/" className="flex items-center gap-2 rounded-lg hover:bg-gray-100 px-4 py-2 text-gray-700">
+//             <img alt="dashboard-icon" src={require("../assets/dashboard-icon.png")} />
+//             <span className="text-sm font-medium"> Dashboard </span>
+//           </Link>
+
+//           {isAdmin && (
+//             <details className="group [&_summary::-webkit-details-marker]:hidden">
+//               <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+//                 <Link to="/inventory">
+//                   <div className="flex items-center gap-2">
+//                     <img alt="inventory-icon" src={require("../assets/inventory-icon.png")} />
+//                     <span className="text-sm font-medium"> Inventory </span>
+//                   </div>
+//                 </Link>
+//               </summary>
+//             </details>
+//           )}
+
+//           {isAdmin && (
+//             <Link to="/purchase-details" className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+//               <img alt="purchase-icon" src={require("../assets/order-icon.png")} />
+//               <span className="text-sm font-medium"> Purchase Fabric </span>
+//             </Link>
+//           )}
+
+//           {isAdmin && (
+//             <Link to="/sales" className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+//               <img alt="sale-icon" src={require("../assets/tslogo.jpeg")} className="w-7 h-7 border border-zinc-400 rounded-full" />
+//               <span className="text-sm font-medium"> T-shirt Sales </span>
+//             </Link>
+//           )}
+
+//           {isAdmin && (
+//             <Link to="/employee-details" className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+//               <img alt="supplier-icon" src={require("../assets/supplier-icon.png")} />
+//               <span className="text-sm font-medium"> Employee Details </span>
+//             </Link>
+//           )}
+
+//           {isAdmin && (
+//             <Link to="/attendance" className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+//               <img alt="store-icon" src={require("../assets/att.png")} className="w-7 h-7 border border-zinc-400 rounded-full" />
+//               <span className="text-sm font-medium"> Attendance </span>
+//             </Link>
+//           )}
+
+//           {isAdmin && (
+//             <details className="group [&_summary::-webkit-details-marker]:hidden">
+//               <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+//                 <Link to="/manage-store">
+//                   <div className="flex items-center gap-2">
+//                     <img alt="store-icon" src={require("../assets/st.png")} className="w-7 h-7 border border-zinc-400 rounded-full" />
+//                     <span className="text-sm font-medium"> Manage Store </span>
+//                   </div>
+//                 </Link>
+//               </summary>
+//             </details>
+//           )}
+
+//           {/* For Gmail users, show specific information */}
+//           {!isAdmin && (
+//             <Link to={`/employee-details/${localStorageData.id}`} className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+//               <img alt="supplier-icon" src={require("../assets/supplier-icon.png")} />
+//               <span className="text-sm font-medium"> My Details </span>
+//             </Link>
+//           )}
+//         </nav>
+//       </div>
+
+//       <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
+//         <div className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
+//           <img alt="Profile" src={localStorageData.imageUrl} className="h-10 w-10 rounded-full object-cover" />
+//           <div>
+//             <p className="text-xs">
+//               <strong className="block font-medium">
+//                 {localStorageData.firstName + " " + localStorageData.lastName}
+//               </strong>
+//               <span> {localStorageData.email} </span>
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default SideMenu;
+
 import React from "react";
 import { Link } from "react-router-dom";
 
 function SideMenu() {
   const localStorageData = JSON.parse(localStorage.getItem("user"));
 
+  // Check the email domain to identify if it's an admin
+  const isAdmin = localStorageData.email.endsWith('@velavan.com');
+
   return (
-    <div className="h-full flex-col justify-between  bg-white hidden lg:flex ">
+    <div className="h-full flex-col justify-between bg-white hidden lg:flex">
       <div className="px-4 py-6">
         <nav aria-label="Main Nav" className="mt-6 flex flex-col space-y-1">
-          <Link
-            to="/"
-            className="flex items-center gap-2 rounded-lg hover:bg-gray-100 px-4 py-2 text-gray-700"
-          >
-            <img
-              alt="dashboard-icon"
-              src={require("../assets/dashboard-icon.png")}
-            />
-            <span className="text-sm font-medium"> Dashboard </span>
-          </Link>
 
-          <details className="group [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-              <Link to="/inventory">
-                <div className="flex items-center gap-2">
-                  <img
-                    alt="inventory-icon"
-                    src={require("../assets/inventory-icon.png")}
-                  />
-                  <span className="text-sm font-medium"> Inventory </span>
-                </div>
+          {isAdmin ? (
+            <>
+              {/* Admin Links */}
+              <Link to="/" className="flex items-center gap-2 rounded-lg hover:bg-gray-100 px-4 py-2 text-gray-700">
+                <img alt="dashboard-icon" src={require("../assets/dashboard-icon.png")} />
+                <span className="text-sm font-medium"> Dashboard </span>
               </Link>
-            </summary>
-          </details>
 
-          <Link
-            to="/purchase-details"
-            className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-          >
-            <img
-              alt="purchase-icon"
-              src={require("../assets/supplier-icon.png")}
-            />
-            <span className="text-sm font-medium"> Purchase Details</span>
-          </Link>
-          <Link
-            to="/sales"
-            className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-          >
-            <img alt="sale-icon" src={require("../assets/supplier-icon.png")} />
-            <span className="text-sm font-medium"> Sales</span>
-          </Link>
+              <details className="group [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                  <Link to="/inventory">
+                    <div className="flex items-center gap-2">
+                      <img alt="inventory-icon" src={require("../assets/inventory-icon.png")} />
+                      <span className="text-sm font-medium"> Inventory </span>
+                    </div>
+                  </Link>
+                </summary>
+              </details>
 
-          <details className="group [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-              <Link to="/manage-store">
-                <div className="flex items-center gap-2">
-                  <img
-                    alt="store-icon"
-                    src={require("../assets/order-icon.png")}
-                  />
-                  <span className="text-sm font-medium"> Manage Store </span>
-                </div>
+              <Link to="/purchase-details" className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                <img alt="purchase-icon" src={require("../assets/order-icon.png")} />
+                <span className="text-sm font-medium"> Purchase Fabric </span>
               </Link>
-            </summary>
-          </details>
+
+              <Link to="/sales" className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                <img alt="sale-icon" src={require("../assets/tslogo.jpeg")} className="w-7 h-7 border border-zinc-400 rounded-full" />
+                <span className="text-sm font-medium"> T-shirt Sales </span>
+              </Link>
+
+              <Link to="/employee-details" className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                <img alt="supplier-icon" src={require("../assets/supplier-icon.png")} />
+                <span className="text-sm font-medium"> Employee Details </span>
+              </Link>
+
+              <Link to="/attendance" className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                <img alt="store-icon" src={require("../assets/att.png")} className="w-7 h-7 border border-zinc-400 rounded-full" />
+                <span className="text-sm font-medium"> Attendance </span>
+              </Link>
+
+              <details className="group [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                  <Link to="/manage-store">
+                    <div className="flex items-center gap-2">
+                      <img alt="store-icon" src={require("../assets/st.png")} className="w-7 h-7 border border-zinc-400 rounded-full" />
+                      <span className="text-sm font-medium"> Manage Store </span>
+                    </div>
+                  </Link>
+                </summary>
+              </details>
+            </>
+          ) : (
+            // Non-admin user: Show only "My Details"
+            <Link to={`/employee-details/${localStorageData.id}`} className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+              <img alt="supplier-icon" src={require("../assets/supplier-icon.png")} />
+              <span className="text-sm font-medium"> My Details </span>
+            </Link>
+          )}
         </nav>
       </div>
 
+      {/* User Profile Section */}
       <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
         <div className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
-          <img
-            alt="Profile"
-            src={localStorageData.imageUrl}
-            className="h-10 w-10 rounded-full object-cover"
-          />
-
+          <img alt="Profile" src={localStorageData.imageUrl} className="h-10 w-10 rounded-full object-cover" />
           <div>
             <p className="text-xs">
               <strong className="block font-medium">
                 {localStorageData.firstName + " " + localStorageData.lastName}
               </strong>
-
               <span> {localStorageData.email} </span>
             </p>
           </div>
